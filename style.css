@@ -2,36 +2,26 @@
 // 这里是一段代码
 console.log("Hello, world!");
 </pre>
-<button id="start">开始滚动</button>
-<button id="stop">停止滚动</button>
-<script>
-  // 获取元素
-  var code = document.getElementById("code");
-  var start = document.getElementById("start");
-  var stop = document.getElementById("stop");
-  // 定义一个变量来存储滚动的间隔
-  var interval;
-  // 定义一个函数来滚动代码
-  function scrollCode() {
-    // 滚动页面，每次滚动10像素
-    window.scrollBy(0, 10);
-    // 如果代码已经滚出视野，就回到顶部
-    if (code.getBoundingClientRect().bottom < 0) {
-      window.scrollTo(0, 0);
+<style>
+  /* 设置代码元素的高度和溢出属性 */
+  #code {
+    height: 300px;
+    overflow: hidden;
+  }
+  /* 定义一个名为scroll的动画 */
+  @keyframes scroll {
+    /* 动画开始时，代码元素的位置为0 */
+    from {
+      transform: translateY(0);
+    }
+    /* 动画结束时，代码元素的位置为负的自身高度 */
+    to {
+      transform: translateY(-100%);
     }
   }
-  // 当点击开始按钮时，开始滚动
-  start.addEventListener("click", function() {
-    // 如果已经在滚动，就不重复执行
-    if (interval) return;
-    // 设置一个间隔，每隔100毫秒执行一次滚动函数
-    interval = setInterval(scrollCode, 100);
-  });
-  // 当点击停止按钮时，停止滚动
-  stop.addEventListener("click", function() {
-    // 清除间隔
-    clearInterval(interval);
-    // 将变量重置为null
-    interval = null;
-  });
-</script>
+  /* 当鼠标悬停在代码元素上时，触发动画 */
+  #code:hover {
+    /* 设置动画的名称、持续时间、方向、重复次数等属性 */
+    animation: scroll 5s linear infinite;
+  }
+</style>
