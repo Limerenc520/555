@@ -1,5 +1,44 @@
 <!DOCTYPE html>
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+<pre id="code">
+// 这里是一段代码
+console.log("Hello, world!");
+</pre>
+<button id="start">开始滚动</button>
+<button id="stop">停止滚动</button>
+<script>
+  // 获取元素
+  var code = document.getElementById("code");
+  var start = document.getElementById("start");
+  var stop = document.getElementById("stop");
+  // 定义一个变量来存储滚动的间隔
+  var interval;
+  // 定义一个函数来滚动代码
+  function scrollCode() {
+    // 滚动页面，每次滚动10像素
+    window.scrollBy(0, 10);
+    // 如果代码已经滚出视野，就回到顶部
+    if (code.getBoundingClientRect().bottom < 0) {
+      window.scrollTo(0, 0);
+    }
+  }
+  // 当点击开始按钮时，开始滚动
+  start.addEventListener("click", function() {
+    // 如果已经在滚动，就不重复执行
+    if (interval) return;
+    // 设置一个间隔，每隔100毫秒执行一次滚动函数
+    interval = setInterval(scrollCode, 100);
+  });
+  // 当点击停止按钮时，停止滚动
+  stop.addEventListener("click", function() {
+    // 清除间隔
+    clearInterval(interval);
+    // 将变量重置为null
+    interval = null;
+  });
+</script>
+
     
     <meta name="Author" content="Noah">
     <meta name="Keywords" content="">
